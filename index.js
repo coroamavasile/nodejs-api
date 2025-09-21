@@ -14,7 +14,6 @@ function broadcast(roomId) {
   if (!game) return;
 
   game.players.forEach(p => {
-      console.log(game.getState(p.id))
     io.to(p.id).emit("updateGame", game.getState(p.id));
   });
 }
@@ -77,6 +76,8 @@ io.on("connection", socket => {
   });
 });
 
-server.listen(3001, () => {
+const port = process.env.PORT || 4000 
+
+server.listen(port, () => {
   console.log("🚀 Serverul Șeptică rulează pe http://localhost:3001");
 });
